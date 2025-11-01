@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 
- const gentoken = (id)=>{
-    return jwt.sign({id},process.env.SECRET_KEY,{expiresIn:"7d"})
+ const gentoken = (userid)=>{
+    return jwt.sign({userid},process.env.SECRET_KEY,{expiresIn:"7d"})
 
        
  }

@@ -8,12 +8,12 @@ export const Signup = async (req, res) => {
     const { name, username, email, password } = req.body;
 
     if (!name || !username || !email || !password) {
-      return res.status(400).send("All fields are required");
+      return res.status(400).json({ message: "All fields are required" });
     }
 
     const checkEmail = await User.findOne({email});
     if (checkEmail) {
-      return res.status(400).send("Email is already registered");
+       return res.status(400).json({ message: "Email is already registered" });
     }
 
     if (name.length < 3) {
@@ -41,7 +41,7 @@ export const Signup = async (req, res) => {
 
      res.cookie("token",token,{
       httpOnly:true,
-      secure:true,
+      secure:false,
       maxAge:7*24*60*60*1000,
         sameSite: "strict" 
       
@@ -89,7 +89,7 @@ export const login = async(req,res)=>{
       httpOnly:true,
       sameSite:"strict",
       maxAge:7*24*60*60*1000,
-      secure:true
+      secure:false
     })
  res.status(200).json({
       message: "Login successfully",
